@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <meta
+    name="description"
+    content="Currículo de Kauã Restoff de Oliveira - formações, cursos, idiomas, soft skills e hard skills."
+  />
+
+  <meta name="author" content="Kauã Restoff de Oliveira" />
+
+  <title>Restoff | Currículo</title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%238c5cff'/%3E%3Cstop offset='100%25' stop-color='%23a579ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='70' font-weight='bold' font-family='Arial, sans-serif' fill='url(%23grad)'%3EKR%3C/text%3E%3C/svg%3E"
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Outfit", sans-serif;
+      line-height: 1.7;
+      background: var(--fundo);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    :root,
+    body.theme-light {
+      --fundo: #eceaf4;
+      --texto: #11111a;
+      --texto-sec: #555463;
+      --titulo: #080817;
+      --destaque: #6d3bff;
+      --destaque-hover: #8c5cff;
+      --destaque-soft: rgba(109, 59, 255, 0.14);
+      --borda: rgba(20, 18, 35, 0.12);
+      --card-bg: rgba(255, 255, 255, 0.52);
+      --vidro: rgba(255, 255, 255, 0.68);
+      --glass-border: rgba(255, 255, 255, 0.55);
+      --glass-shadow: rgba(58, 40, 110, 0.18);
+      --surface: rgba(255, 255, 255, 0.56);
+      --surface-hover: rgba(255, 255, 255, 0.70);
+      --skill-row: rgba(255, 255, 255, 0.46);
+    }
+
+    body.theme-dark-blue {
+      --fundo: #061226;
+      --texto: #e8e8e8;
+      --texto-sec: #bac6d8;
+      --titulo: #f7f9fc;
+      --destaque: #8c5cff;
+      --destaque-hover: #a579ff;
+      --destaque-soft: rgba(140, 92, 255, 0.14);
+      --borda: rgba(255, 255, 255, 0.06);
+      --card-bg: rgba(255, 255, 255, 0.055);
+      --vidro: rgba(12, 20, 36, 0.58);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-shadow: rgba(0, 0, 0, 0.35);
+      --surface: rgba(16, 14, 31, 0.68);
+      --surface-hover: rgba(24, 20, 44, 0.80);
+      --skill-row: rgba(255, 255, 255, 0.055);
+    }
+
+    body.theme-dark-black {
+      --fundo: #090909;
+      --texto: #e8e8e8;
+      --texto-sec: #c6c6c6;
+      --titulo: #fafafa;
+      --destaque: #8c5cff;
+      --destaque-hover: #a579ff;
+      --destaque-soft: rgba(140, 92, 255, 0.14);
+      --borda: rgba(255, 255, 255, 0.06);
+      --card-bg: rgba(255, 255, 255, 0.045);
+      --vidro: rgba(15, 15, 18, 0.58);
+      --glass-border: rgba(255, 255, 255, 0.10);
+      --glass-shadow: rgba(0, 0, 0, 0.45);
+      --surface: rgba(16, 14, 24, 0.72);
+      --surface-hover: rgba(25, 21, 38, 0.84);
+      --skill-row: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 12% 20%, rgba(140, 92, 255, 0.20), transparent 32%),
+        radial-gradient(circle at 86% 28%, rgba(140, 92, 255, 0.12), transparent 34%),
+        radial-gradient(circle at 50% 100%, rgba(23, 133, 130, 0.10), transparent 35%),
+        var(--fundo);
+    }
+
+    .floating-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.22;
+      animation: floatRing 18s infinite ease-in-out;
+    }
+
+    @keyframes floatRing {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.1); }
+      100% { transform: translate(-20px, 20px) scale(1); }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: 0.25s ease;
+    }
+
+    header.scrolled {
+      background: var(--vidro);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 12px 30px var(--glass-shadow);
+    }
+
+    .navbar {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--destaque), var(--titulo));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      margin: 0 auto;
+    }
+
+    .nav-links a {
+      color: var(--texto);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--destaque);
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: var(--destaque);
+      box-shadow: 0 0 14px var(--destaque);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle,
+    .lang-toggle {
+      background: var(--card-bg);
+      color: var(--texto);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow:
+        0 10px 24px var(--glass-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .theme-toggle:hover,
+    .lang-toggle:hover {
+      border-color: var(--destaque);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--texto);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 8rem 0 4rem;
+      border-top: 1px solid var(--borda);
+      min-height: 100vh;
+      scroll-margin-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      right: -180px;
+      bottom: -180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(140, 92, 255, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .bg-secondary {
+      background: transparent;
+    }
+
+    .text-accent {
+      color: var(--destaque);
+    }
+
+    h2 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: var(--titulo);
+      font-weight: 900;
+      margin-bottom: 2.7rem;
+    }
+
+    h3 {
+      font-size: 1.45rem;
+      margin-bottom: 1rem;
+      color: var(--titulo);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+    }
+
+    #curriculo .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    #curriculo .container > div:first-of-type {
+      padding: 1.2rem;
+      border-radius: 1.8rem;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 24px 60px var(--glass-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .accordion-item,
+    .idioma-card,
+    .tech-category {
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035)),
+        var(--surface);
+      border-radius: 1.15rem;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 18px 42px var(--glass-shadow),
+        0 4px 10px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.13),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .accordion-item {
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      font-weight: 800;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      color: var(--texto);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .accordion-header:hover {
+      background: rgba(140, 92, 255, 0.10);
+      color: var(--titulo);
+    }
+
+    .accordion-header i {
+      color: var(--destaque);
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      padding: 0 1.2rem;
+      overflow: hidden;
+      transition:
+        max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        padding 0.35s ease;
+      color: var(--texto-sec);
+      font-size: 0.96rem;
+      line-height: 1.65;
+    }
+
+    .accordion-content strong {
+      color: var(--titulo);
+    }
+
+    .accordion-item.open {
+      border-color: rgba(140, 92, 255, 0.34);
+      box-shadow:
+        0 22px 52px var(--glass-shadow),
+        0 0 30px rgba(140, 92, 255, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .accordion-item.open .accordion-header i {
+      transform: rotate(180deg);
+    }
+
+    .accordion-item.open .accordion-content {
+      max-height: 300px;
+      padding: 0 1.2rem 1.05rem;
+    }
+
+    .idiomas-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .idioma-card {
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+      padding: 1rem 1.2rem;
+    }
+
+    .idioma-card i {
+      color: var(--destaque);
+      margin-right: 0.4rem;
+    }
+
+    .idioma-card strong {
+      color: var(--titulo);
+    }
+
+    .idioma-card span {
+      color: var(--texto-sec);
+      font-size: 0.92rem;
+    }
+
+    .soft-tag {
+      background: linear-gradient(135deg, var(--destaque), var(--destaque-hover));
+      color: #ffffff;
+      padding: 0.42rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin: 0.25rem;
+      box-shadow:
+        0 12px 24px rgba(140, 92, 255, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    .soft-tag:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 16px 28px rgba(140, 92, 255, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tech-category {
+      padding: 1.05rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-category::before {
+      content: "";
+      position: absolute;
+      inset: -35%;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(140, 92, 255, 0.15), transparent 34%),
+        radial-gradient(circle at 88% 80%, rgba(165, 121, 255, 0.09), transparent 32%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .tech-category > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tech-category:hover {
+      transform: translateY(-4px);
+      border-color: rgba(140, 92, 255, 0.36);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04)),
+        var(--surface-hover);
+      box-shadow:
+        0 24px 54px var(--glass-shadow),
+        0 0 24px rgba(140, 92, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+
+    .tech-category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    .tech-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--destaque), var(--destaque-hover));
+      box-shadow:
+        0 13px 26px rgba(140, 92, 255, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+      flex: 0 0 auto;
+    }
+
+    .tech-category-header h4 {
+      color: var(--titulo);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+
+    .tech-category-header p {
+      color: var(--texto-sec);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-top: 0.1rem;
+    }
+
+    .skill-level-list {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .skill-level-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      padding: 0.58rem 0.68rem;
+      border-radius: 0.9rem;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        var(--skill-row);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+
+    .skill-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      color: var(--texto);
+      font-size: 0.86rem;
+      font-weight: 850;
+    }
+
+    .skill-name i {
+      color: var(--destaque);
+      font-size: 0.95rem;
+    }
+
+    .skill-level {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.56rem;
+      border-radius: 999px;
+      color: var(--destaque);
+      background: var(--destaque-soft);
+      border: 1px solid rgba(140, 92, 255, 0.22);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tool-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .tool-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      padding: 0.45rem 0.65rem;
+      border-radius: 999px;
+      color: var(--texto);
+      font-size: 0.82rem;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    .tool-pill i {
+      color: var(--destaque);
+      font-size: 0.86rem;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1050px) {
+      .tech-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 72%;
+        height: calc(100vh - 70px);
+        background: var(--vidro);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 2rem;
+        gap: 1.8rem;
+        border-right: 1px solid var(--glass-border);
+        z-index: 99;
+        transition: left 0.3s ease;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .header-actions {
+        gap: 0.5rem;
+      }
+
+      .theme-toggle span {
+        display: none;
+      }
+
+      #curriculo .container > div:first-of-type {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+
+      .idiomas-grid {
+        flex-direction: column;
+      }
+
+      .soft-tag {
+        padding: 0.3rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      .accordion-header {
+        font-size: 0.95rem;
+        padding: 0.8rem 1rem;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0 1rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .lang-toggle,
+      .theme-toggle {
+        padding: 0.35rem 0.7rem;
+      }
+
+      .nav-links {
+        width: 84%;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      section {
+        padding: 6.5rem 0 3rem;
+      }
+
+      h2 {
+        font-size: 2.4rem;
+      }
+
+      .soft-tag {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.8rem;
+      }
+
+      .tech-category {
+        padding: 0.95rem;
+      }
+
+      .skill-level-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="theme-dark-blue">
+
+  <div class="floating-bg" id="floatingBg"></div>
+
+  <header id="header">
+    <nav class="navbar">
+
+      <div
+        class="logo"
+        id="logoHome"
+        tabindex="0"
+        role="button"
+        aria-label="KR - Voltar ao topo"
+      >
+        KR
+      </div>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menu de navegação"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio" data-key="nav_home">Início</a></li>
+        <li><a href="#sobre" data-key="nav_about">Sobre</a></li>
+        <li><a href="#trajetoria" data-key="nav_journey">Trajetória</a></li>
+        <li><a href="#curriculo" data-key="nav_resume" class="active">Currículo</a></li>
+        <li><a href="#projetos" data-key="nav_projects">Projetos</a></li>
+        <li><a href="#contatos" data-key="nav_contact">Contatos</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Trocar idioma">
+          <i class="fas fa-globe"></i>
+          <span id="langText">PT</span>
+        </button>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Trocar tema">
+          <i class="fas fa-desktop"></i>
+          <span>Tema</span>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+    <section id="curriculo" class="fade-up bg-secondary">
+      <div class="container">
+        <h2 style="text-align:center">
+          <span class="text-accent" data-key="resume_title">Currículo</span>
+        </h2>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:3rem">
+          <div>
+            <h3 data-key="academic_title">Formação Acadêmica</h3>
+
+            <div class="accordion-item" data-group="academic">
+              <div class="accordion-header">
+                <span data-key="academic_1_title">Técnico em Informática (SENAC)</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+
+              <div class="accordion-content">
+                <strong data-key="academic_1_date">Fev/2025 - Jun/2026</strong><br>
+                <span data-key="academic_1_desc">
+                  Formação técnica com foco em informática, suporte, manutenção, sistemas operacionais, redes e ferramentas digitais.
+                </span>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-group="academic">
+              <div class="accordion-header">
+                <span data-key="academic_2_title">Técnico em Desenvolvimento de Sistemas (SENAI)</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+
+              <div class="accordion-content">
+                <strong data-key="academic_2_date">Mar/2025 - Jul/2026</strong><br>
+                <span data-key="academic_2_desc">
+                  Formação voltada à lógica de programação, desenvolvimento web, banco de dados e criação de sistemas.
+                </span>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-group="academic">
+              <div class="accordion-header">
+                <span data-key="academic_3_title">Ensino Médio (FUNEC)</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+
+              <div class="accordion-content">
+                <strong data-key="academic_3_date">Conclusão: Dez/2026</strong><br>
+                <span data-key="academic_3_desc">Ensino médio regular em andamento.</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 data-key="courses_title">Cursos Complementares</h3>
+
+            <div class="accordion-item" data-group="courses">
+              <div class="accordion-header">
+                <span data-key="course_1_title">English for IT 1 (Cisco/OpenEDG)</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+
+              <div class="accordion-content">
+                <strong data-key="course_1_date">50h - 2026</strong><br>
+                <span data-key="course_1_desc">
+                  Inglês técnico aplicado à tecnologia, leitura de documentação, termos técnicos e comunicação profissional.
+                </span>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-group="courses">
+              <div class="accordion-header">
+                <span data-key="course_2_title">Bootcamp Java & Spring Boot (DIO)</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+
+              <div class="accordion-content">
+                <strong data-key="course_2_date">56h - 2026</strong><br>
+                <span data-key="course_2_desc">
+                  Desenvolvimento backend com Java, Spring Boot, APIs REST, POO e versionamento com Git.
+                </span>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-group="courses">
+              <div class="accordion-header">
+                <span data-key="course_3_title">Marketing Digital (Move Cultura)</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+
+              <div class="accordion-content">
+                <strong data-key="course_3_date">46h - 2024</strong><br>
+                <span data-key="course_3_desc">
+                  Fundamentos de presença digital, conteúdo, comunicação e estratégias para redes sociais.
+                </span>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-group="courses">
+              <div class="accordion-header">
+                <span data-key="course_4_title">Ferramentas Digitais (Move Cultura)</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+
+              <div class="accordion-content">
+                <strong data-key="course_4_date">46h - 2024</strong><br>
+                <span data-key="course_4_desc">
+                  Uso de ferramentas digitais, pacote Office e recursos voltados à organização e produtividade.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:2rem">
+          <h3 style="text-align:center" data-key="languages_title">Idiomas</h3>
+
+          <div class="idiomas-grid">
+            <div class="idioma-card">
+              <i class="fas fa-language"></i>
+              <strong data-key="lang_pt">Português</strong><br>
+              <span data-key="lang_pt_desc">Língua materna</span>
+            </div>
+
+            <div class="idioma-card">
+              <i class="fas fa-language"></i>
+              <strong data-key="lang_en">Inglês</strong><br>
+              <span data-key="lang_en_desc">Nível B1 - Técnico em TI</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:2rem">
+          <h3 style="text-align:center" data-key="soft_title">Soft Skills</h3>
+
+          <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem">
+            <span class="soft-tag" data-key="soft_1">Proatividade</span>
+            <span class="soft-tag" data-key="soft_2">Trabalho em equipe</span>
+            <span class="soft-tag" data-key="soft_3">Resolução de problemas</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="text-align:center" data-key="hard_title">Hard Skills & Tecnologias</h3>
+
+          <div class="tech-grid">
+
+            <div class="tech-category">
+              <div class="tech-category-header">
+                <div class="tech-icon">
+                  <i class="fas fa-window-maximize"></i>
+                </div>
+
+                <div>
+                  <h4 data-key="front_title">Front-end</h4>
+                  <p data-key="front_desc">Interfaces, telas e experiência visual</p>
+                </div>
+              </div>
+
+              <div class="skill-level-list">
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fab fa-html5"></i>HTML5</span>
+                  <span class="skill-level" data-key="skill_advanced">Avançado</span>
+                </div>
+
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fab fa-css3-alt"></i>CSS3</span>
+                  <span class="skill-level" data-key="skill_advanced">Avançado</span>
+                </div>
+
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fab fa-js"></i>JavaScript</span>
+                  <span class="skill-level" data-key="skill_intermediate">Intermediário</span>
+                </div>
+
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fab fa-react"></i>React</span>
+                  <span class="skill-level" data-key="skill_basic">Básico</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <div class="tech-category-header">
+                <div class="tech-icon">
+                  <i class="fas fa-server"></i>
+                </div>
+
+                <div>
+                  <h4 data-key="back_title">Back-end</h4>
+                  <p data-key="back_desc">Lógica, APIs e regras de negócio</p>
+                </div>
+              </div>
+
+              <div class="skill-level-list">
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fab fa-java"></i>Java</span>
+                  <span class="skill-level" data-key="skill_intermediate">Intermediário</span>
+                </div>
+
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fas fa-code"></i>C#</span>
+                  <span class="skill-level" data-key="skill_intermediate">Intermediário</span>
+                </div>
+
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fab fa-php"></i>PHP</span>
+                  <span class="skill-level" data-key="skill_basic">Básico</span>
+                </div>
+
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fab fa-python"></i>Python</span>
+                  <span class="skill-level" data-key="skill_basic">Básico</span>
+                </div>
+
+                <div class="skill-level-item">
+                  <span class="skill-name"><i class="fas fa-code"></i>C</span>
+                  <span class="skill-level" data-key="skill_basic">Básico</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <div class="tech-category-header">
+                <div class="tech-icon">
+                  <i class="fas fa-database"></i>
+                </div>
+
+                <div>
+                  <h4 data-key="database_title">Banco de Dados</h4>
+                  <p data-key="database_desc">Armazenamento e organização de dados</p>
+                </div>
+              </div>
+
+              <div class="tool-list">
+                <span class="tool-pill"><i class="fas fa-database"></i>MySQL</span>
+                <span class="tool-pill"><i class="fas fa-table"></i>SQL</span>
+                <span class="tool-pill"><i class="fas fa-diagram-project"></i>Modelagem básica</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <div class="tech-category-header">
+                <div class="tech-icon">
+                  <i class="fas fa-code-branch"></i>
+                </div>
+
+                <div>
+                  <h4 data-key="version_title">Ferramentas de Desenvolvimento</h4>
+                  <p data-key="version_desc">Git, GitHub e fluxo de código</p>
+                </div>
+              </div>
+
+              <div class="tool-list">
+                <span class="tool-pill"><i class="fab fa-git-alt"></i>Git</span>
+                <span class="tool-pill"><i class="fab fa-github"></i>GitHub</span>
+                <span class="tool-pill"><i class="fas fa-terminal"></i>Terminal</span>
+                <span class="tool-pill"><i class="fas fa-code"></i>VS Code</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <div class="tech-category-header">
+                <div class="tech-icon">
+                  <i class="fas fa-pen-nib"></i>
+                </div>
+
+                <div>
+                  <h4 data-key="design_title">UI/UX & Prototipação</h4>
+                  <p data-key="design_desc">Interface, experiência e protótipos</p>
+                </div>
+              </div>
+
+              <div class="tool-list">
+                <span class="tool-pill"><i class="fab fa-figma"></i>Figma</span>
+                <span class="tool-pill"><i class="fas fa-palette"></i>UI/UX</span>
+                <span class="tool-pill"><i class="fas fa-layer-group"></i>Canva</span>
+                <span class="tool-pill"><i class="fas fa-wand-magic-sparkles"></i>Prototipação</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <div class="tech-category-header">
+                <div class="tech-icon">
+                  <i class="fas fa-screwdriver-wrench"></i>
+                </div>
+
+                <div>
+                  <h4 data-key="infra_title">Infraestrutura & Suporte</h4>
+                  <p data-key="infra_desc">Computadores, redes e manutenção</p>
+                </div>
+              </div>
+
+              <div class="tool-list">
+                <span class="tool-pill"><i class="fas fa-network-wired"></i>Redes</span>
+                <span class="tool-pill"><i class="fas fa-microchip"></i>Hardware</span>
+                <span class="tool-pill"><i class="fab fa-windows"></i>Windows</span>
+                <span class="tool-pill"><i class="fab fa-linux"></i>Linux básico</span>
+                <span class="tool-pill"><i class="fas fa-stethoscope"></i>Diagnóstico</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const header = document.getElementById("header");
+    const logoHome = document.getElementById("logoHome");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const themeToggle = document.getElementById("themeToggle");
+    const langToggle = document.getElementById("langToggle");
+    const langText = document.getElementById("langText");
+    const floatingBg = document.getElementById("floatingBg");
+
+    const translations = {
+      pt: {
+        nav_home: "Início",
+        nav_about: "Sobre",
+        nav_journey: "Trajetória",
+        nav_resume: "Currículo",
+        nav_projects: "Projetos",
+        nav_contact: "Contatos",
+
+        resume_title: "Currículo",
+        academic_title: "Formação Acadêmica",
+        courses_title: "Cursos Complementares",
+
+        academic_1_title: "Técnico em Informática (SENAC)",
+        academic_1_date: "Fev/2025 - Jun/2026",
+        academic_1_desc: "Formação técnica com foco em informática, suporte, manutenção, sistemas operacionais, redes e ferramentas digitais.",
+
+        academic_2_title: "Técnico em Desenvolvimento de Sistemas (SENAI)",
+        academic_2_date: "Mar/2025 - Jul/2026",
+        academic_2_desc: "Formação voltada à lógica de programação, desenvolvimento web, banco de dados e criação de sistemas.",
+
+        academic_3_title: "Ensino Médio (FUNEC)",
+        academic_3_date: "Conclusão: Dez/2026",
+        academic_3_desc: "Ensino médio regular em andamento.",
+
+        course_1_title: "English for IT 1 (Cisco/OpenEDG)",
+        course_1_date: "50h - 2026",
+        course_1_desc: "Inglês técnico aplicado à tecnologia, leitura de documentação, termos técnicos e comunicação profissional.",
+
+        course_2_title: "Bootcamp Java & Spring Boot (DIO)",
+        course_2_date: "56h - 2026",
+        course_2_desc: "Desenvolvimento backend com Java, Spring Boot, APIs REST, POO e versionamento com Git.",
+
+        course_3_title: "Marketing Digital (Move Cultura)",
+        course_3_date: "46h - 2024",
+        course_3_desc: "Fundamentos de presença digital, conteúdo, comunicação e estratégias para redes sociais.",
+
+        course_4_title: "Ferramentas Digitais (Move Cultura)",
+        course_4_date: "46h - 2024",
+        course_4_desc: "Uso de ferramentas digitais, pacote Office e recursos voltados à organização e produtividade.",
+
+        languages_title: "Idiomas",
+        lang_pt: "Português",
+        lang_pt_desc: "Língua materna",
+        lang_en: "Inglês",
+        lang_en_desc: "Nível B1 - Técnico em TI",
+
+        soft_title: "Soft Skills",
+        soft_1: "Proatividade",
+        soft_2: "Trabalho em equipe",
+        soft_3: "Resolução de problemas",
+
+        hard_title: "Hard Skills & Tecnologias",
+
+        front_title: "Front-end",
+        front_desc: "Interfaces, telas e experiência visual",
+        back_title: "Back-end",
+        back_desc: "Lógica, APIs e regras de negócio",
+        database_title: "Banco de Dados",
+        database_desc: "Armazenamento e organização de dados",
+        version_title: "Ferramentas de Desenvolvimento",
+        version_desc: "Git, GitHub e fluxo de código",
+        design_title: "UI/UX & Prototipação",
+        design_desc: "Interface, experiência e protótipos",
+        infra_title: "Infraestrutura & Suporte",
+        infra_desc: "Computadores, redes e manutenção",
+
+        skill_advanced: "Avançado",
+        skill_intermediate: "Intermediário",
+        skill_basic: "Básico"
+      },
+
+      en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_journey: "Journey",
+        nav_resume: "Resume",
+        nav_projects: "Projects",
+        nav_contact: "Contact",
+
+        resume_title: "Resume",
+        academic_title: "Academic Background",
+        courses_title: "Complementary Courses",
+
+        academic_1_title: "IT Technician (SENAC)",
+        academic_1_date: "Feb/2025 - Jun/2026",
+        academic_1_desc: "Technical training focused on IT, support, maintenance, operating systems, networks, and digital tools.",
+
+        academic_2_title: "Systems Development Technician (SENAI)",
+        academic_2_date: "Mar/2025 - Jul/2026",
+        academic_2_desc: "Training focused on programming logic, web development, databases, and system creation.",
+
+        academic_3_title: "High School (FUNEC)",
+        academic_3_date: "Completion: Dec/2026",
+        academic_3_desc: "Regular high school in progress.",
+
+        course_1_title: "English for IT 1 (Cisco/OpenEDG)",
+        course_1_date: "50h - 2026",
+        course_1_desc: "Technical English applied to technology, documentation reading, technical terms, and professional communication.",
+
+        course_2_title: "Java & Spring Boot Bootcamp (DIO)",
+        course_2_date: "56h - 2026",
+        course_2_desc: "Backend development with Java, Spring Boot, REST APIs, OOP, and Git versioning.",
+
+        course_3_title: "Digital Marketing (Move Cultura)",
+        course_3_date: "46h - 2024",
+        course_3_desc: "Fundamentals of digital presence, content, communication, and social media strategies.",
+
+        course_4_title: "Digital Tools (Move Cultura)",
+        course_4_date: "46h - 2024",
+        course_4_desc: "Use of digital tools, Office suite, and resources focused on organization and productivity.",
+
+        languages_title: "Languages",
+        lang_pt: "Portuguese",
+        lang_pt_desc: "Native",
+        lang_en: "English",
+        lang_en_desc: "B1 level - Technical IT",
+
+        soft_title: "Soft Skills",
+        soft_1: "Proactivity",
+        soft_2: "Teamwork",
+        soft_3: "Problem solving",
+
+        hard_title: "Hard Skills & Technologies",
+
+        front_title: "Front-end",
+        front_desc: "Interfaces, screens, and visual experience",
+        back_title: "Back-end",
+        back_desc: "Logic, APIs, and business rules",
+        database_title: "Database",
+        database_desc: "Data storage and organization",
+        version_title: "Development Tools",
+        version_desc: "Git, GitHub, and code workflow",
+        design_title: "UI/UX & Prototyping",
+        design_desc: "Interface, experience, and prototypes",
+        infra_title: "Infrastructure & Support",
+        infra_desc: "Computers, networks, and maintenance",
+
+        skill_advanced: "Advanced",
+        skill_intermediate: "Intermediate",
+        skill_basic: "Basic"
+      }
+    };
+
+    let currentLang = localStorage.getItem("portfolio-lang") || "pt";
+
+    function applyLanguage(lang) {
+      document.querySelectorAll("[data-key]").forEach((element) => {
+        const key = element.getAttribute("data-key");
+
+        if (translations[lang][key]) {
+          element.innerText = translations[lang][key];
+        }
+      });
+
+      langText.innerText = lang.toUpperCase();
+      localStorage.setItem("portfolio-lang", lang);
+    }
+
+    langToggle.addEventListener("click", () => {
+      currentLang = currentLang === "pt" ? "en" : "pt";
+      applyLanguage(currentLang);
+    });
+
+    const themes = ["light", "dark-blue", "dark-black"];
+
+    const themeIcons = {
+      light: "fa-sun",
+      "dark-blue": "fa-desktop",
+      "dark-black": "fa-moon"
+    };
+
+    let currentTheme = localStorage.getItem("portfolio-theme") || "dark-blue";
+
+    function setTheme(theme) {
+      document.body.classList.remove(
+        "theme-light",
+        "theme-dark-blue",
+        "theme-dark-black"
+      );
+
+      document.body.classList.add(`theme-${theme}`);
+
+      const icon = themeToggle.querySelector("i");
+      icon.className = `fas ${themeIcons[theme]}`;
+
+      currentTheme = theme;
+      localStorage.setItem("portfolio-theme", theme);
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const currentIndex = themes.indexOf(currentTheme);
+      const nextTheme = themes[(currentIndex + 1) % themes.length];
+
+      setTheme(nextTheme);
+    });
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.querySelectorAll(".nav-links a").forEach((item) => {
+          item.classList.remove("active");
+        });
+
+        link.classList.add("active");
+        navLinks.classList.remove("active");
+      });
+    });
+
+    document.querySelectorAll(".accordion-header").forEach((header) => {
+      header.addEventListener("click", () => {
+        const item = header.closest(".accordion-item");
+        const group = item.dataset.group;
+
+        document.querySelectorAll(`.accordion-item[data-group="${group}"]`).forEach((accordionItem) => {
+          if (accordionItem !== item) {
+            accordionItem.classList.remove("open");
+          }
+        });
+
+        item.classList.toggle("open");
+      });
+    });
+
+    logoHome.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    logoHome.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+
+    const fadeElements = document.querySelectorAll(".fade-up");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    fadeElements.forEach((element) => observer.observe(element));
+
+    function createRings() {
+      floatingBg.innerHTML = "";
+
+      const gradients = [
+        "linear-gradient(135deg, #8c5cff, #150c2f)",
+        "linear-gradient(135deg, #0A1828, #8c5cff)",
+        "linear-gradient(135deg, #8c5cff, #4e2acb)"
+      ];
+
+      for (let i = 0; i < 3; i++) {
+        const ring = document.createElement("div");
+        ring.className = "ring";
+
+        const size = 300 + Math.random() * 200;
+
+        ring.style.width = `${size}px`;
+        ring.style.height = `${size}px`;
+        ring.style.background = gradients[i % gradients.length];
+        ring.style.left = `${Math.random() * 100}%`;
+        ring.style.top = `${Math.random() * 100}%`;
+        ring.style.animationDelay = `${i * 2}s`;
+
+        floatingBg.appendChild(ring);
+      }
+    }
+
+    setTheme(currentTheme);
+    applyLanguage(currentLang);
+    createRings();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <meta 
+    name="description" 
+    content="Sobre Kauã Restoff - estudante e desenvolvedor em formação na área de tecnologia."
+  />
+
+  <meta name="author" content="Kauã Restoff de Oliveira" />
+
+  <title>Restoff | Sobre</title>
+
+  <link 
+    rel="icon" 
+    type="image/svg+xml" 
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%238c5cff'/%3E%3Cstop offset='100%25' stop-color='%23a579ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='70' font-weight='bold' font-family='Arial, sans-serif' fill='url(%23grad)'%3EKR%3C/text%3E%3C/svg%3E"
+  />
+
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" 
+    rel="stylesheet"
+  />
+
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Outfit", sans-serif;
+      line-height: 1.7;
+      background: var(--fundo);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    :root,
+    body.theme-light {
+      --fundo: #eceaf4;
+      --texto: #11111a;
+      --texto-sec: #555463;
+      --titulo: #080817;
+      --destaque: #6d3bff;
+      --destaque-hover: #8c5cff;
+      --destaque-soft: rgba(109, 59, 255, 0.14);
+      --borda: rgba(20, 18, 35, 0.12);
+      --card-bg: rgba(255, 255, 255, 0.52);
+      --vidro: rgba(255, 255, 255, 0.68);
+      --glass-border: rgba(255, 255, 255, 0.55);
+      --glass-shadow: rgba(58, 40, 110, 0.18);
+      --panel-bg: rgba(255, 255, 255, 0.58);
+      --soft-card: rgba(255, 255, 255, 0.50);
+    }
+
+    body.theme-dark-blue {
+      --fundo: #061226;
+      --texto: #e8e8e8;
+      --texto-sec: #bac6d8;
+      --titulo: #f7f9fc;
+      --destaque: #8c5cff;
+      --destaque-hover: #a579ff;
+      --destaque-soft: rgba(140, 92, 255, 0.14);
+      --borda: rgba(255, 255, 255, 0.06);
+      --card-bg: rgba(255, 255, 255, 0.055);
+      --vidro: rgba(12, 20, 36, 0.58);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-shadow: rgba(0, 0, 0, 0.35);
+      --panel-bg: rgba(16, 14, 31, 0.68);
+      --soft-card: rgba(255, 255, 255, 0.05);
+    }
+
+    body.theme-dark-black {
+      --fundo: #090909;
+      --texto: #e8e8e8;
+      --texto-sec: #c6c6c6;
+      --titulo: #fafafa;
+      --destaque: #8c5cff;
+      --destaque-hover: #a579ff;
+      --destaque-soft: rgba(140, 92, 255, 0.14);
+      --borda: rgba(255, 255, 255, 0.06);
+      --card-bg: rgba(255, 255, 255, 0.045);
+      --vidro: rgba(15, 15, 18, 0.58);
+      --glass-border: rgba(255, 255, 255, 0.10);
+      --glass-shadow: rgba(0, 0, 0, 0.45);
+      --panel-bg: rgba(16, 14, 24, 0.74);
+      --soft-card: rgba(255, 255, 255, 0.045);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 12% 20%, rgba(140, 92, 255, 0.20), transparent 32%),
+        radial-gradient(circle at 86% 28%, rgba(140, 92, 255, 0.12), transparent 34%),
+        radial-gradient(circle at 50% 100%, rgba(23, 133, 130, 0.10), transparent 35%),
+        var(--fundo);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .floating-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.22;
+      animation: floatRing 18s infinite ease-in-out;
+    }
+
+    @keyframes floatRing {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.1); }
+      100% { transform: translate(-20px, 20px) scale(1); }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: 0.25s ease;
+    }
+
+    header.scrolled {
+      background: var(--vidro);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 12px 30px var(--glass-shadow);
+    }
+
+    .navbar {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--destaque), var(--titulo));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      margin: 0 auto;
+    }
+
+    .nav-links a {
+      color: var(--texto);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--destaque);
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: var(--destaque);
+      box-shadow: 0 0 14px var(--destaque);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle,
+    .lang-toggle {
+      background: var(--card-bg);
+      color: var(--texto);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow:
+        0 10px 24px var(--glass-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .theme-toggle:hover,
+    .lang-toggle:hover {
+      border-color: var(--destaque);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--texto);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+      border-top: 1px solid var(--borda);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-section::before {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      right: -180px;
+      bottom: -180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(140, 92, 255, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .profile-card {
+      width: min(340px, 100%);
+      border-radius: 2rem;
+      padding: 1.45rem 1.35rem;
+      text-align: center;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.035)),
+        var(--panel-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow:
+        0 30px 72px var(--glass-shadow),
+        0 8px 18px rgba(0, 0, 0, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    .profile-photo-wrap {
+      width: 186px;
+      height: 186px;
+      margin: 0 auto 1.15rem;
+      border-radius: 50%;
+      overflow: hidden;
+      background: rgba(140, 92, 255, 0.12);
+      border: 3px solid rgba(140, 92, 255, 0.45);
+      box-shadow:
+        0 18px 42px rgba(140, 92, 255, 0.22),
+        0 8px 22px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    .profile-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: none;
+    }
+
+    .profile-info-clean {
+      margin-bottom: 1rem;
+    }
+
+    .profile-info-clean h2 {
+      color: var(--titulo);
+      font-size: 1.35rem;
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      margin-bottom: 0.55rem;
+    }
+
+    .profile-info-clean p {
+      color: var(--texto-sec);
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0.12rem 0;
+    }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.8rem;
+    }
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--texto);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow:
+        0 12px 24px rgba(0,0,0,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      font-size: 1.12rem;
+    }
+
+    .social-icon:hover {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--destaque), var(--destaque-hover));
+      border-color: rgba(140, 92, 255, 0.35);
+      transform: translateY(-3px);
+      box-shadow:
+        0 18px 30px rgba(140, 92, 255, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .cv-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.68rem 1rem;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.9rem;
+      background: linear-gradient(135deg, var(--destaque), var(--destaque-hover));
+      box-shadow:
+        0 16px 30px rgba(140, 92, 255, 0.26),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.14);
+      min-width: 205px;
+    }
+
+    .cv-button:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 22px 34px rgba(140, 92, 255, 0.34),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+    }
+
+    .about-content {
+      position: relative;
+      max-width: 720px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.42rem 0.95rem;
+      border-radius: 999px;
+      margin-bottom: 1.4rem;
+      color: var(--destaque);
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--destaque-soft);
+      border: 1px solid rgba(140, 92, 255, 0.24);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow:
+        0 12px 26px rgba(140, 92, 255, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    }
+
+    .about-title {
+      font-size: clamp(3rem, 6.4vw, 4.75rem);
+      color: var(--titulo);
+      line-height: 1.02;
+      letter-spacing: -0.065em;
+      font-weight: 900;
+      margin-bottom: 1.35rem;
+    }
+
+    .about-title span {
+      color: #d8c8ff;
+      text-shadow: 0 0 22px rgba(140, 92, 255, 0.24);
+    }
+
+    body.theme-light .about-title span {
+      color: var(--destaque);
+    }
+
+    .about-text {
+      color: var(--texto-sec);
+      font-size: 1.08rem;
+      line-height: 1.78;
+      margin-bottom: 1rem;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1050px) {
+      .about-layout {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+      }
+
+      .about-visual {
+        order: 1;
+      }
+
+      .about-content {
+        order: 2;
+        max-width: 100%;
+      }
+
+      .profile-card {
+        width: min(340px, 100%);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 72%;
+        height: calc(100vh - 70px);
+        background: var(--vidro);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 2rem;
+        gap: 1.8rem;
+        border-right: 1px solid var(--glass-border);
+        z-index: 99;
+        transition: left 0.3s ease;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .header-actions {
+        gap: 0.5rem;
+      }
+
+      .theme-toggle span {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .about-section {
+        padding: 6.5rem 0 3rem;
+      }
+
+      .about-title {
+        font-size: 2.75rem;
+      }
+
+      .about-text {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0 1rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .lang-toggle,
+      .theme-toggle {
+        padding: 0.35rem 0.7rem;
+      }
+
+      .nav-links {
+        width: 84%;
+      }
+
+      .about-title {
+        font-size: 2.35rem;
+      }
+
+      .profile-card {
+        width: 100%;
+        padding: 1.25rem;
+      }
+
+      .profile-photo-wrap {
+        width: 160px;
+        height: 160px;
+      }
+
+      .profile-info-clean h2 {
+        font-size: 1.2rem;
+      }
+
+      .cv-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body class="theme-dark-blue">
+
+  <div class="floating-bg" id="floatingBg"></div>
+
+  <header id="header">
+    <nav class="navbar">
+
+      <div 
+        class="logo" 
+        id="logoHome" 
+        tabindex="0" 
+        role="button" 
+        aria-label="KR - Voltar ao topo"
+      >
+        KR
+      </div>
+
+      <button 
+        class="menu-toggle" 
+        id="menuToggle" 
+        aria-label="Abrir menu de navegação"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio" data-key="nav_home">Início</a></li>
+        <li><a href="#sobre" data-key="nav_about" class="active">Sobre</a></li>
+        <li><a href="#trajetoria" data-key="nav_journey">Trajetória</a></li>
+        <li><a href="#curriculo" data-key="nav_resume">Currículo</a></li>
+        <li><a href="#projetos" data-key="nav_projects">Projetos</a></li>
+        <li><a href="#contatos" data-key="nav_contact">Contatos</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Trocar idioma">
+          <i class="fas fa-globe"></i>
+          <span id="langText">PT</span>
+        </button>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Trocar tema">
+          <i class="fas fa-desktop"></i>
+          <span>Tema</span>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+    <section id="sobre" class="about-section fade-up">
+      <div class="container">
+        <div class="about-layout">
+
+          <div class="about-visual">
+            <div class="profile-card">
+              <div class="profile-photo-wrap">
+                <img
+                  class="profile-photo"
+                  src="https://i.ibb.co/fzyCP9Zp/perfil.png"
+                  alt="Kauã Restoff de Oliveira"
+                  loading="lazy"
+                  onerror="this.src='https://placehold.co/400x400/8c5cff/ffffff?text=Kaua+Restoff'"
+                />
+              </div>
+
+              <div class="profile-info-clean">
+                <h2>Kauã Restoff de Oliveira</h2>
+                <p data-key="value_age">17 anos</p>
+                <p data-key="value_location">Contagem, MG</p>
+              </div>
+
+              <div class="social-row">
+                <a
+                  class="social-icon"
+                  href="https://www.linkedin.com/in/kauã-restoff-2821163a0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+
+                <a
+                  class="social-icon"
+                  href="https://github.com/restoffkaua08-afk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+
+            <a
+              class="cv-button"
+              href="../assets/Curriculo_Restoff.pdf"
+              download
+              aria-label="Baixar currículo"
+            >
+              <i class="fas fa-download"></i>
+              <span data-key="download_cv">Download Currículo</span>
+            </a>
+          </div>
+
+          <div class="about-content">
+            <div class="section-kicker">
+              <i class="fas fa-user"></i>
+              <span data-key="about_kicker">Sobre mim</span>
+            </div>
+
+            <h1 class="about-title">
+              <span data-key="about_title_1">Quem é</span><br>
+              <span data-key="about_title_2">Kauã Restoff?</span>
+            </h1>
+
+            <p class="about-text" data-key="about_p1">
+              Sou estudante do ensino médio e estou construindo minha trajetória na área de tecnologia por meio de formações técnicas, projetos práticos e estudo constante. Tenho interesse em desenvolvimento web, criação de interfaces, experiência do usuário e sistemas completos.
+            </p>
+
+            <p class="about-text" data-key="about_p2">
+              Atualmente curso Técnico em Informática no SENAC e Técnico em Desenvolvimento de Sistemas no SENAI, conciliando os estudos com projetos pessoais para evoluir minhas habilidades em programação, organização de código, design de interfaces e resolução de problemas.
+            </p>
+
+            <p class="about-text" data-key="about_p3">
+              Meu foco é conquistar minha primeira oportunidade profissional na área de tecnologia, seja como jovem aprendiz ou estágio, aplicando na prática o que venho aprendendo e evoluindo em projetos reais.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const header = document.getElementById("header");
+    const logoHome = document.getElementById("logoHome");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const themeToggle = document.getElementById("themeToggle");
+    const langToggle = document.getElementById("langToggle");
+    const langText = document.getElementById("langText");
+    const floatingBg = document.getElementById("floatingBg");
+
+    const translations = {
+      pt: {
+        nav_home: "Início",
+        nav_about: "Sobre",
+        nav_journey: "Trajetória",
+        nav_resume: "Currículo",
+        nav_projects: "Projetos",
+        nav_contact: "Contatos",
+
+        value_age: "17 anos",
+        value_location: "Contagem, MG",
+
+        download_cv: "Download Currículo",
+
+        about_kicker: "Sobre mim",
+        about_title_1: "Quem é",
+        about_title_2: "Kauã Restoff?",
+
+        about_p1: "Sou estudante do ensino médio e estou construindo minha trajetória na área de tecnologia por meio de formações técnicas, projetos práticos e estudo constante. Tenho interesse em desenvolvimento web, criação de interfaces, experiência do usuário e sistemas completos.",
+        about_p2: "Atualmente curso Técnico em Informática no SENAC e Técnico em Desenvolvimento de Sistemas no SENAI, conciliando os estudos com projetos pessoais para evoluir minhas habilidades em programação, organização de código, design de interfaces e resolução de problemas.",
+        about_p3: "Meu foco é conquistar minha primeira oportunidade profissional na área de tecnologia, seja como jovem aprendiz ou estágio, aplicando na prática o que venho aprendendo e evoluindo em projetos reais."
+      },
+
+      en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_journey: "Journey",
+        nav_resume: "Resume",
+        nav_projects: "Projects",
+        nav_contact: "Contact",
+
+        value_age: "17 years old",
+        value_location: "Contagem, MG",
+
+        download_cv: "Download Resume",
+
+        about_kicker: "About me",
+        about_title_1: "Who is",
+        about_title_2: "Kauã Restoff?",
+
+        about_p1: "I am a high school student building my path in technology through technical education, practical projects, and constant study. I am interested in web development, interface creation, user experience, and complete systems.",
+        about_p2: "I currently study Technical IT at SENAC and Technical Systems Development at SENAI, combining my studies with personal projects to improve my skills in programming, code organization, interface design, and problem solving.",
+        about_p3: "My focus is to achieve my first professional opportunity in technology, either as an apprentice or intern, applying in practice what I have been learning and evolving through real projects."
+      }
+    };
+
+    let currentLang = localStorage.getItem("portfolio-lang") || "pt";
+
+    function applyLanguage(lang) {
+      document.querySelectorAll("[data-key]").forEach((element) => {
+        const key = element.getAttribute("data-key");
+
+        if (translations[lang][key]) {
+          element.innerText = translations[lang][key];
+        }
+      });
+
+      langText.innerText = lang.toUpperCase();
+      localStorage.setItem("portfolio-lang", lang);
+    }
+
+    langToggle.addEventListener("click", () => {
+      currentLang = currentLang === "pt" ? "en" : "pt";
+      applyLanguage(currentLang);
+    });
+
+    const themes = ["light", "dark-blue", "dark-black"];
+
+    const themeIcons = {
+      light: "fa-sun",
+      "dark-blue": "fa-desktop",
+      "dark-black": "fa-moon"
+    };
+
+    let currentTheme = localStorage.getItem("portfolio-theme") || "dark-blue";
+
+    function setTheme(theme) {
+      document.body.classList.remove(
+        "theme-light",
+        "theme-dark-blue",
+        "theme-dark-black"
+      );
+
+      document.body.classList.add(`theme-${theme}`);
+
+      const icon = themeToggle.querySelector("i");
+      icon.className = `fas ${themeIcons[theme]}`;
+
+      currentTheme = theme;
+      localStorage.setItem("portfolio-theme", theme);
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const currentIndex = themes.indexOf(currentTheme);
+      const nextTheme = themes[(currentIndex + 1) % themes.length];
+      setTheme(nextTheme);
+    });
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.querySelectorAll(".nav-links a").forEach((item) => {
+          item.classList.remove("active");
+        });
+
+        link.classList.add("active");
+        navLinks.classList.remove("active");
+      });
+    });
+
+    logoHome.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    logoHome.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+
+    const fadeElements = document.querySelectorAll(".fade-up");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    fadeElements.forEach((element) => observer.observe(element));
+
+    function createRings() {
+      floatingBg.innerHTML = "";
+
+      const gradients = [
+        "linear-gradient(135deg, #8c5cff, #150c2f)",
+        "linear-gradient(135deg, #0A1828, #8c5cff)",
+        "linear-gradient(135deg, #8c5cff, #4e2acb)"
+      ];
+
+      for (let i = 0; i < 3; i++) {
+        const ring = document.createElement("div");
+        ring.className = "ring";
+
+        const size = 300 + Math.random() * 200;
+        ring.style.width = `${size}px`;
+        ring.style.height = `${size}px`;
+        ring.style.background = gradients[i % gradients.length];
+        ring.style.left = `${Math.random() * 100}%`;
+        ring.style.top = `${Math.random() * 100}%`;
+        ring.style.animationDelay = `${i * 2}s`;
+
+        floatingBg.appendChild(ring);
+      }
+    }
+
+    setTheme(currentTheme);
+    applyLanguage(currentLang);
+    createRings();
+  </script>
+
+</body>
+</html>
