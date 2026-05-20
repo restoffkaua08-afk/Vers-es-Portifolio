@@ -1624,80 +1624,102 @@ html[data-theme="dark"] .plcLamp {
 }
 /* TSEA_PLC_PANEL_CSS_END */
 
-/* TSEA_SIDEBAR_TOGGLE_CSS_START */
-#tsea-sidebar-toggle {
+/* TSEA_MENU_SANDWICH_FIX_CSS_START */
+#tsea-menu-sandwich-fixed {
   position: fixed;
   top: 18px;
   left: 18px;
-  z-index: 99999;
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  border-radius: 14px;
-  background: rgba(15, 23, 42, 0.92);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.28);
+  z-index: 999999;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 15px;
+  background: rgba(15, 23, 42, 0.96);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.38);
   display: grid;
   place-items: center;
   gap: 4px;
   padding: 10px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, left 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
-#tsea-sidebar-toggle:hover {
+#tsea-menu-sandwich-fixed:hover {
   transform: translateY(-1px);
-  background: rgba(30, 41, 59, 0.96);
+  background: rgba(30, 41, 59, 0.98);
+  box-shadow: 0 20px 52px rgba(15, 23, 42, 0.45);
 }
 
-#tsea-sidebar-toggle span {
+#tsea-menu-sandwich-fixed span {
   display: block;
-  width: 22px;
+  width: 23px;
   height: 2px;
   border-radius: 999px;
   background: #e2e8f0;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-#tsea-sidebar-toggle.is-collapsed span:nth-child(1) {
+#tsea-menu-sandwich-fixed.is-collapsed span:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
 
-#tsea-sidebar-toggle.is-collapsed span:nth-child(2) {
+#tsea-menu-sandwich-fixed.is-collapsed span:nth-child(2) {
   opacity: 0;
 }
 
-#tsea-sidebar-toggle.is-collapsed span:nth-child(3) {
+#tsea-menu-sandwich-fixed.is-collapsed span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-.tsea-sidebar-hidden {
-  display: none !important;
+[data-tsea-menu-target="true"] {
+  transition: width 0.22s ease, min-width 0.22s ease, max-width 0.22s ease, opacity 0.18s ease, transform 0.22s ease, padding 0.22s ease, margin 0.22s ease;
 }
 
-.tsea-layout-collapsed {
+[data-tsea-menu-target="true"].tsea-menu-target-collapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-120%) !important;
+}
+
+body.tsea-menu-collapsed .app,
+body.tsea-menu-collapsed .app-shell,
+body.tsea-menu-collapsed .layout,
+body.tsea-menu-collapsed .shell,
+body.tsea-menu-collapsed #root > div {
   grid-template-columns: 1fr !important;
 }
 
-body.tsea-sidebar-collapsed .main,
-body.tsea-sidebar-collapsed main,
-body.tsea-sidebar-collapsed .content,
-body.tsea-sidebar-collapsed .page,
-body.tsea-sidebar-collapsed .app-main {
+body.tsea-menu-collapsed main,
+body.tsea-menu-collapsed .main,
+body.tsea-menu-collapsed .content,
+body.tsea-menu-collapsed .page,
+body.tsea-menu-collapsed .app-main,
+body.tsea-menu-collapsed .dashboard,
+body.tsea-menu-collapsed .view {
   width: 100% !important;
   max-width: 100% !important;
 }
 
-body.tsea-sidebar-collapsed #tsea-sidebar-toggle {
+body.tsea-menu-collapsed #tsea-menu-sandwich-fixed {
   left: 18px;
 }
 
 @media (max-width: 900px) {
-  #tsea-sidebar-toggle {
+  #tsea-menu-sandwich-fixed {
     top: 14px;
     left: 14px;
     width: 44px;
     height: 44px;
   }
 }
-/* TSEA_SIDEBAR_TOGGLE_CSS_END */
+/* TSEA_MENU_SANDWICH_FIX_CSS_END */
 

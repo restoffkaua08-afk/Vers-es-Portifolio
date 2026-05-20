@@ -3314,48 +3314,76 @@ function App() {
 
 createRoot(document.getElementById("root") as HTMLElement).render(<App />);
 
-/* TSEA_SIDEBAR_TOGGLE_START */
-function tseaInstallSidebarToggle() {
-  const existingButton = document.getElementById("tsea-sidebar-toggle");
-  const sidebar = document.querySelector(
-    ".sidebar, .side-menu, .sidenav, aside[class*='sidebar'], aside[class*='side']"
-  ) as HTMLElement | null;
+/* TSEA_MENU_SANDWICH_FIX_START */
+function tseaInstallMenuSandwichFix() {
+  const oldButton = document.getElementById("tsea-menu-sandwich-fixed");
+  if (oldButton) oldButton.remove();
 
-  if (!sidebar || existingButton) return;
+  const labels = ["Painel", "Operação", "Gêmeo Digital", "Histórico", "Relatórios", "Parâmetros"];
 
-  const parent = sidebar.parentElement as HTMLElement | null;
+  function findMenuTarget(): HTMLElement | null {
+    const candidates = Array.from(
+      document.querySelectorAll("aside, nav, .sidebar, .side, .menu, .main-menu, [class*='sidebar'], [class*='Sidebar'], [class*='menu'], [class*='Menu']")
+    ) as HTMLElement[];
+
+    const valid = candidates
+      .filter((element) => {
+        const text = element.textContent || "";
+        return labels.filter((label) => text.includes(label)).length >= 4;
+      })
+      .sort((a, b) => {
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+        return (ar.width * ar.height) - (br.width * br.height);
+      });
+
+    return valid[0] || null;
+  }
 
   const button = document.createElement("button");
-  button.id = "tsea-sidebar-toggle";
+  button.id = "tsea-menu-sandwich-fixed";
   button.type = "button";
-  button.setAttribute("aria-label", "Abrir ou fechar menu lateral");
+  button.setAttribute("aria-label", "Abrir ou fechar menu");
   button.setAttribute("title", "Abrir/fechar menu");
   button.innerHTML = "<span></span><span></span><span></span>";
 
+  document.body.appendChild(button);
+
   function applyState(collapsed: boolean) {
-    sidebar.classList.toggle("tsea-sidebar-hidden", collapsed);
-    parent?.classList.toggle("tsea-layout-collapsed", collapsed);
-    document.body.classList.toggle("tsea-sidebar-collapsed", collapsed);
+    const menuTarget = findMenuTarget();
+
+    if (menuTarget) {
+      menuTarget.setAttribute("data-tsea-menu-target", "true");
+      menuTarget.classList.toggle("tsea-menu-target-collapsed", collapsed);
+    }
+
+    document.body.classList.toggle("tsea-menu-collapsed", collapsed);
     button.classList.toggle("is-collapsed", collapsed);
     button.setAttribute("aria-expanded", String(!collapsed));
-    localStorage.setItem("tsea.sidebarCollapsed", String(collapsed));
+    localStorage.setItem("tsea.menuCollapsed", String(collapsed));
   }
 
-  const saved = localStorage.getItem("tsea.sidebarCollapsed") === "true";
+  const saved = localStorage.getItem("tsea.menuCollapsed") === "true";
   applyState(saved);
 
   button.addEventListener("click", () => {
-    const collapsed = !sidebar.classList.contains("tsea-sidebar-hidden");
+    const collapsed = !document.body.classList.contains("tsea-menu-collapsed");
     applyState(collapsed);
   });
 
-  document.body.appendChild(button);
+  window.addEventListener("resize", () => {
+    const collapsed = localStorage.getItem("tsea.menuCollapsed") === "true";
+    applyState(collapsed);
+  });
+
+  setTimeout(() => applyState(localStorage.getItem("tsea.menuCollapsed") === "true"), 500);
+  setTimeout(() => applyState(localStorage.getItem("tsea.menuCollapsed") === "true"), 1200);
 }
 
 window.addEventListener("load", () => {
-  window.setTimeout(tseaInstallSidebarToggle, 250);
+  setTimeout(tseaInstallMenuSandwichFix, 300);
 });
 
-window.setTimeout(tseaInstallSidebarToggle, 700);
-/* TSEA_SIDEBAR_TOGGLE_END */
+setTimeout(tseaInstallMenuSandwichFix, 900);
+/* TSEA_MENU_SANDWICH_FIX_END */
 
