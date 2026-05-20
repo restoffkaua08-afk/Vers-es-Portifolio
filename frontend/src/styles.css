@@ -1624,12 +1624,76 @@ html[data-theme="dark"] .plcLamp {
 }
 /* TSEA_PLC_PANEL_CSS_END */
 
-/* TSEA_PROFESSIONAL_SIDEBAR_CSS_START */
-#tsea-professional-menu-toggle {
-  position: fixed;
+/* TSEA_NATIVE_SIDEBAR_CSS_START */
+
+/* Layout principal com sidebar real */
+.app {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 0;
+  min-height: 100vh;
+  transition: grid-template-columns 0.28s ease;
+}
+
+.app.sidebar-collapsed {
+  grid-template-columns: 0 minmax(0, 1fr);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+  overflow: hidden;
+  transition:
+    width 0.28s ease,
+    min-width 0.28s ease,
+    max-width 0.28s ease,
+    padding 0.28s ease,
+    opacity 0.22s ease,
+    transform 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.sidebar.open {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.sidebar.closed {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-color: transparent !important;
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+/* Conteúdo principal se adapta ao espaço disponível */
+.main,
+main,
+.content,
+.app-main {
+  min-width: 0;
+  width: 100%;
+  transition:
+    width 0.28s ease,
+    max-width 0.28s ease,
+    padding 0.28s ease;
+}
+
+/* Botão sanduíche fixo, sempre acessível */
+.menu-toggle,
+button[aria-label="Abrir menu"],
+button[aria-label="Fechar menu"] {
+  position: fixed !important;
   top: 18px;
   left: 18px;
-  z-index: 1000000;
+  z-index: 100000;
   width: 48px;
   height: 48px;
   border: 1px solid rgba(148, 163, 184, 0.38);
@@ -1638,145 +1702,134 @@ html[data-theme="dark"] .plcLamp {
   box-shadow: 0 18px 44px rgba(15, 23, 42, 0.34);
   display: grid;
   place-items: center;
-  padding: 11px;
   cursor: pointer;
   transition:
     transform 0.2s ease,
     background 0.2s ease,
-    box-shadow 0.2s ease,
-    left 0.24s ease;
+    box-shadow 0.2s ease;
 }
 
-#tsea-professional-menu-toggle:hover {
+.menu-toggle:hover,
+button[aria-label="Abrir menu"]:hover,
+button[aria-label="Fechar menu"]:hover {
   transform: translateY(-1px);
   background: rgba(30, 41, 59, 0.98);
   box-shadow: 0 20px 52px rgba(15, 23, 42, 0.45);
 }
 
-#tsea-professional-menu-toggle .tsea-burger-line {
+/* Caso o botão use spans internos */
+.menu-toggle span,
+button[aria-label="Abrir menu"] span,
+button[aria-label="Fechar menu"] span {
   display: block;
   width: 23px;
   height: 2px;
   border-radius: 999px;
   background: #e2e8f0;
-  transition:
-    transform 0.22s ease,
-    opacity 0.18s ease;
 }
 
-#tsea-professional-menu-toggle .tsea-burger-line + .tsea-burger-line {
-  margin-top: 5px;
+/* Evita conteúdo escondido atrás do botão */
+.main-header,
+.header,
+.topbar,
+.page-header {
+  padding-left: 62px;
 }
 
-#tsea-professional-menu-toggle.is-collapsed .tsea-burger-line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+/* Overlay só para tela pequena */
+.backdrop {
+  display: none;
 }
 
-#tsea-professional-menu-toggle.is-collapsed .tsea-burger-line:nth-child(2) {
-  opacity: 0;
-}
-
-#tsea-professional-menu-toggle.is-collapsed .tsea-burger-line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-[data-tsea-layout="true"] {
-  transition:
-    grid-template-columns 0.26s ease,
-    padding 0.26s ease,
-    gap 0.26s ease;
-}
-
-[data-tsea-sidebar="true"] {
-  transition:
-    width 0.26s ease,
-    min-width 0.26s ease,
-    max-width 0.26s ease,
-    opacity 0.2s ease,
-    transform 0.26s ease,
-    margin 0.26s ease,
-    padding 0.26s ease;
-  will-change: width, transform, opacity;
-}
-
-[data-tsea-sidebar="true"].tsea-sidebar-collapsed {
-  width: 0 !important;
-  min-width: 0 !important;
-  max-width: 0 !important;
-  flex-basis: 0 !important;
-  opacity: 0 !important;
-  overflow: hidden !important;
-  pointer-events: none !important;
-  transform: translateX(-105%) !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  border-width: 0 !important;
-}
-
-html[data-sidebar="collapsed"] [data-tsea-layout="true"] {
-  grid-template-columns: 1fr !important;
-}
-
-html[data-sidebar="collapsed"] main,
-html[data-sidebar="collapsed"] .main,
-html[data-sidebar="collapsed"] .content,
-html[data-sidebar="collapsed"] .page,
-html[data-sidebar="collapsed"] .view,
-html[data-sidebar="collapsed"] .dashboard,
-html[data-sidebar="collapsed"] .app-main,
-html[data-sidebar="collapsed"] .workspace,
-html[data-sidebar="collapsed"] .panel-area,
-html[data-sidebar="collapsed"] [class*="content"],
-html[data-sidebar="collapsed"] [class*="Content"],
-html[data-sidebar="collapsed"] [class*="main"],
-html[data-sidebar="collapsed"] [class*="Main"] {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-html[data-sidebar="collapsed"] section,
-html[data-sidebar="collapsed"] article,
-html[data-sidebar="collapsed"] .card,
-html[data-sidebar="collapsed"] .section,
-html[data-sidebar="collapsed"] .panel {
+/* Cards e grades ganham espaço sem quebrar */
+.app.sidebar-collapsed .grid,
+.app.sidebar-collapsed .cards,
+.app.sidebar-collapsed .dashboard-grid,
+.app.sidebar-collapsed .metrics-grid,
+.app.sidebar-collapsed .operation-layout,
+.app.sidebar-collapsed .twin-layout,
+.app.sidebar-collapsed .reports-layout {
   max-width: 100%;
 }
 
-html[data-sidebar="open"] #tsea-professional-menu-toggle {
-  left: 18px;
-}
+/* Responsividade profissional */
+@media (max-width: 1100px) {
+  .app,
+  .app.sidebar-collapsed {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
-html[data-sidebar="collapsed"] #tsea-professional-menu-toggle {
-  left: 18px;
-}
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99990;
+    height: 100vh;
+    max-height: 100vh;
+    width: 300px;
+    min-width: 300px;
+    max-width: min(300px, 86vw);
+    overflow-y: auto;
+    transform: translateX(-100%);
+  }
 
-@media (max-width: 900px) {
-  #tsea-professional-menu-toggle {
+  .sidebar.open {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .sidebar.closed {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 99980;
+    background: rgba(15, 23, 42, 0.46);
+    backdrop-filter: blur(3px);
+  }
+
+  body.tsea-sidebar-closed .backdrop {
+    display: none !important;
+  }
+
+  .menu-toggle,
+  button[aria-label="Abrir menu"],
+  button[aria-label="Fechar menu"] {
     top: 14px;
     left: 14px;
     width: 44px;
     height: 44px;
   }
 
-  [data-tsea-sidebar="true"] {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    z-index: 999998;
-    height: 100vh;
-    max-height: 100vh;
-    overflow-y: auto;
-  }
-
-  html[data-sidebar="collapsed"] [data-tsea-sidebar="true"] {
-    transform: translateX(-110%) !important;
-  }
-
-  html[data-sidebar="open"] [data-tsea-sidebar="true"] {
-    transform: translateX(0) !important;
+  .main-header,
+  .header,
+  .topbar,
+  .page-header {
+    padding-left: 58px;
   }
 }
-/* TSEA_PROFESSIONAL_SIDEBAR_CSS_END */
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 86vw;
+    min-width: 86vw;
+    max-width: 86vw;
+  }
+
+  .main,
+  main,
+  .content,
+  .app-main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* TSEA_NATIVE_SIDEBAR_CSS_END */
 
