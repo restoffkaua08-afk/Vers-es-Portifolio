@@ -3314,76 +3314,150 @@ function App() {
 
 createRoot(document.getElementById("root") as HTMLElement).render(<App />);
 
-/* TSEA_MENU_SANDWICH_FIX_START */
-function tseaInstallMenuSandwichFix() {
-  const oldButton = document.getElementById("tsea-menu-sandwich-fixed");
-  if (oldButton) oldButton.remove();
-
+/* TSEA_PROFESSIONAL_SIDEBAR_START */
+function tseaInstallProfessionalSidebar() {
   const labels = ["Painel", "Operação", "Gêmeo Digital", "Histórico", "Relatórios", "Parâmetros"];
 
-  function findMenuTarget(): HTMLElement | null {
+  function findSidebar(): HTMLElement | null {
     const candidates = Array.from(
-      document.querySelectorAll("aside, nav, .sidebar, .side, .menu, .main-menu, [class*='sidebar'], [class*='Sidebar'], [class*='menu'], [class*='Menu']")
+      document.querySelectorAll(
+        "aside, nav, header, section, div[class*='menu'], div[class*='Menu'], div[class*='sidebar'], div[class*='Sidebar'], div[class*='nav'], div[class*='Nav']"
+      )
     ) as HTMLElement[];
 
-    const valid = candidates
-      .filter((element) => {
+    const scored = candidates
+      .map((element) => {
         const text = element.textContent || "";
-        return labels.filter((label) => text.includes(label)).length >= 4;
-      })
-      .sort((a, b) => {
-        const ar = a.getBoundingClientRect();
-        const br = b.getBoundingClientRect();
-        return (ar.width * ar.height) - (br.width * br.height);
-      });
+        const matches = labels.filter((label) => text.includes(label)).length;
+        const rect = element.getBoundingClientRect();
+        const style = window.getComputedStyle(element);
 
-    return valid[0] || null;
+        let score = 0;
+
+        if (matches >= 4) score += matches * 100;
+        if (rect.width >= 180 && rect.width <= 520) score += 80;
+        if (rect.left <= window.innerWidth * 0.35) score += 60;
+        if (style.display.includes("grid") || style.display.includes("flex")) score += 20;
+        if (element.tagName.toLowerCase() === "nav" || element.tagName.toLowerCase() === "aside") score += 40;
+        if (text.length > 0 && text.length < 1200) score += 20;
+
+        return { element, score, matches, rect };
+      })
+      .filter((item) => item.matches >= 4 && item.rect.width > 0 && item.rect.height > 0)
+      .sort((a, b) => b.score - a.score);
+
+    return scored[0]?.element || null;
   }
 
-  const button = document.createElement("button");
-  button.id = "tsea-menu-sandwich-fixed";
-  button.type = "button";
-  button.setAttribute("aria-label", "Abrir ou fechar menu");
-  button.setAttribute("title", "Abrir/fechar menu");
-  button.innerHTML = "<span></span><span></span><span></span>";
+  function getContentRoot(sidebar: HTMLElement | null): HTMLElement | null {
+    if (!sidebar) return null;
 
-  document.body.appendChild(button);
+    let current: HTMLElement | null = sidebar.parentElement;
 
-  function applyState(collapsed: boolean) {
-    const menuTarget = findMenuTarget();
+    while (current && current !== document.body) {
+      const rect = current.getBoundingClientRect();
+      const style = window.getComputedStyle(current);
+      const isLayout =
+        style.display.includes("grid") ||
+        style.display.includes("flex") ||
+        current.children.length >= 2;
 
-    if (menuTarget) {
-      menuTarget.setAttribute("data-tsea-menu-target", "true");
-      menuTarget.classList.toggle("tsea-menu-target-collapsed", collapsed);
+      if (isLayout && rect.width > sidebar.getBoundingClientRect().width) {
+        return current;
+      }
+
+      current = current.parentElement;
     }
 
-    document.body.classList.toggle("tsea-menu-collapsed", collapsed);
-    button.classList.toggle("is-collapsed", collapsed);
-    button.setAttribute("aria-expanded", String(!collapsed));
-    localStorage.setItem("tsea.menuCollapsed", String(collapsed));
+    return document.getElementById("root") as HTMLElement | null;
   }
 
-  const saved = localStorage.getItem("tsea.menuCollapsed") === "true";
+  function ensureButton() {
+    let button = document.getElementById("tsea-professional-menu-toggle") as HTMLButtonElement | null;
+
+    if (!button) {
+      button = document.createElement("button");
+      button.id = "tsea-professional-menu-toggle";
+      button.type = "button";
+      button.setAttribute("aria-label", "Abrir ou fechar menu lateral");
+      button.setAttribute("title", "Abrir/fechar menu lateral");
+      button.innerHTML = `
+        <span class="tsea-burger-line"></span>
+        <span class="tsea-burger-line"></span>
+        <span class="tsea-burger-line"></span>
+      `;
+      document.body.appendChild(button);
+    }
+
+    return button;
+  }
+
+  function applyState(collapsed: boolean) {
+    const sidebar = findSidebar();
+    const layout = getContentRoot(sidebar);
+    const button = ensureButton();
+
+    document.querySelectorAll("[data-tsea-sidebar='true']").forEach((element) => {
+      if (element !== sidebar) {
+        element.removeAttribute("data-tsea-sidebar");
+        element.classList.remove("tsea-sidebar-collapsed");
+      }
+    });
+
+    document.querySelectorAll("[data-tsea-layout='true']").forEach((element) => {
+      if (element !== layout) {
+        element.removeAttribute("data-tsea-layout");
+      }
+    });
+
+    if (sidebar) {
+      sidebar.setAttribute("data-tsea-sidebar", "true");
+      sidebar.classList.toggle("tsea-sidebar-collapsed", collapsed);
+    }
+
+    if (layout) {
+      layout.setAttribute("data-tsea-layout", "true");
+    }
+
+    document.documentElement.dataset.sidebar = collapsed ? "collapsed" : "open";
+    document.body.classList.toggle("tsea-sidebar-is-collapsed", collapsed);
+
+    button.classList.toggle("is-collapsed", collapsed);
+    button.setAttribute("aria-expanded", String(!collapsed));
+
+    localStorage.setItem("tsea.sidebar.collapsed", String(collapsed));
+  }
+
+  const saved = localStorage.getItem("tsea.sidebar.collapsed") === "true";
   applyState(saved);
 
-  button.addEventListener("click", () => {
-    const collapsed = !document.body.classList.contains("tsea-menu-collapsed");
+  const button = ensureButton();
+
+  button.onclick = () => {
+    const collapsed = document.documentElement.dataset.sidebar !== "collapsed";
+    applyState(collapsed);
+  };
+
+  const observer = new MutationObserver(() => {
+    const collapsed = localStorage.getItem("tsea.sidebar.collapsed") === "true";
     applyState(collapsed);
   });
+
+  const root = document.getElementById("root");
+  if (root) {
+    observer.observe(root, { childList: true, subtree: true });
+  }
 
   window.addEventListener("resize", () => {
-    const collapsed = localStorage.getItem("tsea.menuCollapsed") === "true";
+    const collapsed = localStorage.getItem("tsea.sidebar.collapsed") === "true";
     applyState(collapsed);
   });
-
-  setTimeout(() => applyState(localStorage.getItem("tsea.menuCollapsed") === "true"), 500);
-  setTimeout(() => applyState(localStorage.getItem("tsea.menuCollapsed") === "true"), 1200);
 }
 
 window.addEventListener("load", () => {
-  setTimeout(tseaInstallMenuSandwichFix, 300);
+  window.setTimeout(tseaInstallProfessionalSidebar, 200);
 });
 
-setTimeout(tseaInstallMenuSandwichFix, 900);
-/* TSEA_MENU_SANDWICH_FIX_END */
+window.setTimeout(tseaInstallProfessionalSidebar, 800);
+/* TSEA_PROFESSIONAL_SIDEBAR_END */
 

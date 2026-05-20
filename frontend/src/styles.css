@@ -1624,102 +1624,159 @@ html[data-theme="dark"] .plcLamp {
 }
 /* TSEA_PLC_PANEL_CSS_END */
 
-/* TSEA_MENU_SANDWICH_FIX_CSS_START */
-#tsea-menu-sandwich-fixed {
+/* TSEA_PROFESSIONAL_SIDEBAR_CSS_START */
+#tsea-professional-menu-toggle {
   position: fixed;
   top: 18px;
   left: 18px;
-  z-index: 999999;
+  z-index: 1000000;
   width: 48px;
   height: 48px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.38);
   border-radius: 15px;
   background: rgba(15, 23, 42, 0.96);
-  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.38);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.34);
   display: grid;
   place-items: center;
-  gap: 4px;
-  padding: 10px;
+  padding: 11px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    left 0.24s ease;
 }
 
-#tsea-menu-sandwich-fixed:hover {
+#tsea-professional-menu-toggle:hover {
   transform: translateY(-1px);
   background: rgba(30, 41, 59, 0.98);
   box-shadow: 0 20px 52px rgba(15, 23, 42, 0.45);
 }
 
-#tsea-menu-sandwich-fixed span {
+#tsea-professional-menu-toggle .tsea-burger-line {
   display: block;
   width: 23px;
   height: 2px;
   border-radius: 999px;
   background: #e2e8f0;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.22s ease,
+    opacity 0.18s ease;
 }
 
-#tsea-menu-sandwich-fixed.is-collapsed span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
+#tsea-professional-menu-toggle .tsea-burger-line + .tsea-burger-line {
+  margin-top: 5px;
 }
 
-#tsea-menu-sandwich-fixed.is-collapsed span:nth-child(2) {
+#tsea-professional-menu-toggle.is-collapsed .tsea-burger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+#tsea-professional-menu-toggle.is-collapsed .tsea-burger-line:nth-child(2) {
   opacity: 0;
 }
 
-#tsea-menu-sandwich-fixed.is-collapsed span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
+#tsea-professional-menu-toggle.is-collapsed .tsea-burger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-[data-tsea-menu-target="true"] {
-  transition: width 0.22s ease, min-width 0.22s ease, max-width 0.22s ease, opacity 0.18s ease, transform 0.22s ease, padding 0.22s ease, margin 0.22s ease;
+[data-tsea-layout="true"] {
+  transition:
+    grid-template-columns 0.26s ease,
+    padding 0.26s ease,
+    gap 0.26s ease;
 }
 
-[data-tsea-menu-target="true"].tsea-menu-target-collapsed {
+[data-tsea-sidebar="true"] {
+  transition:
+    width 0.26s ease,
+    min-width 0.26s ease,
+    max-width 0.26s ease,
+    opacity 0.2s ease,
+    transform 0.26s ease,
+    margin 0.26s ease,
+    padding 0.26s ease;
+  will-change: width, transform, opacity;
+}
+
+[data-tsea-sidebar="true"].tsea-sidebar-collapsed {
   width: 0 !important;
   min-width: 0 !important;
   max-width: 0 !important;
+  flex-basis: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-105%) !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
   border-width: 0 !important;
-  opacity: 0 !important;
-  overflow: hidden !important;
-  pointer-events: none !important;
-  transform: translateX(-120%) !important;
 }
 
-body.tsea-menu-collapsed .app,
-body.tsea-menu-collapsed .app-shell,
-body.tsea-menu-collapsed .layout,
-body.tsea-menu-collapsed .shell,
-body.tsea-menu-collapsed #root > div {
+html[data-sidebar="collapsed"] [data-tsea-layout="true"] {
   grid-template-columns: 1fr !important;
 }
 
-body.tsea-menu-collapsed main,
-body.tsea-menu-collapsed .main,
-body.tsea-menu-collapsed .content,
-body.tsea-menu-collapsed .page,
-body.tsea-menu-collapsed .app-main,
-body.tsea-menu-collapsed .dashboard,
-body.tsea-menu-collapsed .view {
+html[data-sidebar="collapsed"] main,
+html[data-sidebar="collapsed"] .main,
+html[data-sidebar="collapsed"] .content,
+html[data-sidebar="collapsed"] .page,
+html[data-sidebar="collapsed"] .view,
+html[data-sidebar="collapsed"] .dashboard,
+html[data-sidebar="collapsed"] .app-main,
+html[data-sidebar="collapsed"] .workspace,
+html[data-sidebar="collapsed"] .panel-area,
+html[data-sidebar="collapsed"] [class*="content"],
+html[data-sidebar="collapsed"] [class*="Content"],
+html[data-sidebar="collapsed"] [class*="main"],
+html[data-sidebar="collapsed"] [class*="Main"] {
   width: 100% !important;
   max-width: 100% !important;
 }
 
-body.tsea-menu-collapsed #tsea-menu-sandwich-fixed {
+html[data-sidebar="collapsed"] section,
+html[data-sidebar="collapsed"] article,
+html[data-sidebar="collapsed"] .card,
+html[data-sidebar="collapsed"] .section,
+html[data-sidebar="collapsed"] .panel {
+  max-width: 100%;
+}
+
+html[data-sidebar="open"] #tsea-professional-menu-toggle {
+  left: 18px;
+}
+
+html[data-sidebar="collapsed"] #tsea-professional-menu-toggle {
   left: 18px;
 }
 
 @media (max-width: 900px) {
-  #tsea-menu-sandwich-fixed {
+  #tsea-professional-menu-toggle {
     top: 14px;
     left: 14px;
     width: 44px;
     height: 44px;
   }
+
+  [data-tsea-sidebar="true"] {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 999998;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  html[data-sidebar="collapsed"] [data-tsea-sidebar="true"] {
+    transform: translateX(-110%) !important;
+  }
+
+  html[data-sidebar="open"] [data-tsea-sidebar="true"] {
+    transform: translateX(0) !important;
+  }
 }
-/* TSEA_MENU_SANDWICH_FIX_CSS_END */
+/* TSEA_PROFESSIONAL_SIDEBAR_CSS_END */
 
