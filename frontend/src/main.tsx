@@ -230,6 +230,275 @@ function TankCard({ item }: { item: any }) {
   );
 }
 
+
+/* TSEA_DASHBOARD_INDUSTRIAL_START */
+function IndustrialInfoItem({ label, value }: { label: string; value: any }) {
+  return (
+    <div className="industrial-info-item">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function IndustrialTankVisual({ oil, risk }: { oil: number; risk: number }) {
+  const gasHeight = Math.max(18, Math.min(72, 74 - risk * 0.22));
+  const pressureHeight = Math.max(10, Math.min(70, risk));
+  const oilHeight = Math.max(8, Math.min(44, oil * 5));
+
+  return (
+    <div className="industrial-tank-visual" aria-label="Visual do tanque">
+      <div className="industrial-tank-shell">
+        <div className="industrial-tank-layer gas" style={{ height: `${gasHeight}%` }}>
+          Gás
+        </div>
+        <div className="industrial-tank-layer pressure" style={{ height: `${pressureHeight}%` }}>
+          Pressão
+        </div>
+        <div className="industrial-tank-layer oil" style={{ height: `${oilHeight}%` }}>
+          Óleo
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function IndustrialTankCard({ item, index }: { item: any; index: number }) {
+  const tank = item?.tank || item || {};
+  const hose = item?.hose || {};
+  const pressure = Number(item?.pressure_mbar ?? item?.expected_pressure_mbar ?? 0);
+  const expected = Number(item?.expected_pressure_mbar ?? tank?.structural_limit_mbar ?? 0);
+  const oil = Number(item?.oil_volume_liters ?? 0);
+  const risk = Number(item?.collapse_risk_pct ?? 0);
+  const status = risk >= 82 ? "critical" : risk >= 65 ? "warning" : "success";
+  const signal = risk >= 82 ? "Vermelho" : risk >= 65 ? "Amarelo" : "Verde";
+  const code = tank?.code || item?.code || `TQ-${String(index + 1).padStart(2, "0")}`;
+  const description = tank?.type || item?.type || "Tanque de processo";
+  const hoseCode = hose?.code || item?.hose_code || "Mangueira vinculada";
+
+  return (
+    <article className={`industrial-tank-card ${status}`}>
+      <IndustrialTankVisual oil={oil} risk={risk} />
+
+      <div className="industrial-tank-content">
+        <div className="industrial-tank-header">
+          <div>
+            <h3>{code}</h3>
+            <p>{description}</p>
+          </div>
+          <Badge value={status} />
+        </div>
+
+        <div className="industrial-tank-data-grid">
+          <IndustrialInfoItem label="Pressão atual" value={fmt(pressure, "mbar")} />
+          <IndustrialInfoItem label="Pressão esperada" value={fmt(expected, "mbar")} />
+          <IndustrialInfoItem label="Volume de óleo" value={fmt(oil, "L")} />
+          <IndustrialInfoItem label="Risco estrutural" value={fmt(risk, "%")} />
+        </div>
+
+        <div className="industrial-tank-footer">
+          <div>
+            <span>Mangueira</span>
+            <strong>{hoseCode}</strong>
+          </div>
+          <div>
+            <span>Sinal operacional</span>
+            <strong>{signal}</strong>
+          </div>
+          <div>
+            <span>Estado do processo</span>
+            <strong>{risk >= 82 ? "Revisar antes de liberar" : risk >= 65 ? "Acompanhar operação" : "Dentro da faixa"}</strong>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function IndustrialPumpVisual({ code, active }: { code: string; active: boolean }) {
+  return (
+    <div className={`industrial-pump-visual ${active ? "active" : "idle"}`}>
+      <div className="pump-body">
+        <span>{code}</span>
+      </div>
+      <div className="pump-motor" />
+      <div className="pump-base" />
+    </div>
+  );
+}
+
+function IndustrialPumpCard({
+  code,
+  title,
+  model,
+  stateLabel,
+  performance,
+  connection,
+  active,
+}: {
+  code: string;
+  title: string;
+  model: string;
+  stateLabel: string;
+  performance: string;
+  connection: string;
+  active: boolean;
+}) {
+  const toneValue = stateLabel === "Ligada" ? "success" : stateLabel === "Bloqueada" || stateLabel === "Intertravada" ? "warning" : "neutral";
+
+  return (
+    <article className="industrial-pump-card">
+      <div className="industrial-pump-top">
+        <div>
+          <h3>{title}</h3>
+          <p>{model}</p>
+        </div>
+        <Badge value={toneValue} />
+      </div>
+
+      <IndustrialPumpVisual code={code} active={active} />
+
+      <div className="industrial-pump-data">
+        <IndustrialInfoItem label="Estado" value={stateLabel} />
+        <IndustrialInfoItem label="Desempenho" value={performance} />
+        <IndustrialInfoItem label="Conexão" value={connection} />
+      </div>
+    </article>
+  );
+}
+
+function IndustrialSensorOilCard({ state, tankItems }: { state: any; tankItems: any[] }) {
+  const firstTank = tankItems[0] || {};
+  const pressure = Number(firstTank?.pressure_mbar ?? firstTank?.expected_pressure_mbar ?? 0);
+  const oil = Number(firstTank?.oil_volume_liters ?? 0);
+  const risk = Number(firstTank?.collapse_risk_pct ?? 0);
+  const sensorStatus = risk >= 82 ? "Crítico" : risk >= 65 ? "Atenção" : "Operacional";
+
+  return (
+    <article className="industrial-aux-card">
+      <div className="industrial-aux-header">
+        <h3>Sensores e óleo</h3>
+        <p>Leituras essenciais do processo</p>
+      </div>
+
+      <div className="industrial-aux-grid">
+        <IndustrialInfoItem label="Sensor de pressão" value={sensorStatus} />
+        <IndustrialInfoItem label="Última leitura" value={fmt(pressure, "mbar")} />
+        <IndustrialInfoItem label="Comunicação" value={state ? "Simulada/online" : "Aguardando"} />
+        <IndustrialInfoItem label="Vazão de óleo" value={fmt(state?.oil_flow_l_min ?? 2, "L/min")} />
+        <IndustrialInfoItem label="Volume estimado" value={fmt(oil, "L")} />
+        <IndustrialInfoItem label="Atraso do óleo" value={fmt(state?.oil_delay_seconds ?? 0, "s")} />
+      </div>
+    </article>
+  );
+}
+
+function DashboardIndustrialPanel({
+  state,
+  tanksState,
+  allTanks,
+  allHoses,
+  maxRisk,
+}: {
+  state: any;
+  tanksState: any[];
+  allTanks: any[];
+  allHoses: any[];
+  maxRisk: number;
+}) {
+  const tankItems = Array.isArray(tanksState) && tanksState.length
+    ? tanksState
+    : (allTanks || []).map((tank: any, index: number) => ({
+        tank,
+        hose: allHoses?.[index] || allHoses?.[0],
+        pressure_mbar: tank?.expected_pressure_mbar ?? tank?.structural_limit_mbar ?? 0,
+        expected_pressure_mbar: tank?.structural_limit_mbar ?? 0,
+        oil_volume_liters: 0,
+        collapse_risk_pct: 0,
+        status_light: "green",
+      }));
+
+  const safeTankItems = tankItems.length ? tankItems : [
+    {
+      tank: { code: "TQ-01", type: "Tanque de processo", structural_limit_mbar: 35 },
+      hose: { code: "MG-01" },
+      pressure_mbar: 0,
+      expected_pressure_mbar: 35,
+      oil_volume_liters: 0,
+      collapse_risk_pct: 0,
+      status_light: "green",
+    },
+  ];
+
+  const avgPressure = safeTankItems.length
+    ? safeTankItems.reduce((sum: number, item: any) => sum + Number(item?.pressure_mbar ?? item?.expected_pressure_mbar ?? 0), 0) / safeTankItems.length
+    : 0;
+
+  const primaryRunning = Boolean(state?.primary_pump?.running);
+  const rootsRunning = Boolean(state?.roots_pump?.running);
+
+  return (
+    <>
+      <div className="metrics-grid dashboard-industrial-metrics">
+        <Metric label="Pressão média" value={fmt(avgPressure, "mbar")} detail="Média dos tanques monitorados" status={maxRisk >= 82 ? "critical" : maxRisk >= 65 ? "warning" : "success"} />
+        <Metric label="Estado operacional" value={state?.cycle_state ? statusLabel(state.cycle_state) : "Aguardando"} detail="Situação geral do processo" />
+        <Metric label="Risco máximo" value={fmt(maxRisk, "%")} detail="Maior risco estrutural identificado" status={maxRisk >= 82 ? "critical" : maxRisk >= 65 ? "warning" : "success"} />
+        <Metric label="Tanques ativos" value={safeTankItems.length} detail="Unidades exibidas no painel" />
+      </div>
+
+      <div className="dashboard-industrial-layout">
+        <section className="dashboard-tank-column">
+          <Section
+            title="Tanques de processo"
+            subtitle="Lista vertical com visual do tanque à esquerda e dados técnicos organizados à direita."
+          >
+            <div className="industrial-tank-list">
+              {safeTankItems.map((item: any, index: number) => (
+                <IndustrialTankCard key={item?.tank?.id || item?.tank?.code || item?.id || index} item={item} index={index} />
+              ))}
+            </div>
+          </Section>
+        </section>
+
+        <aside className="dashboard-side-column">
+          <Section title="Bombas de vácuo" subtitle="Estados principais dos acionamentos simulados.">
+            <div className="industrial-pump-list">
+              <IndustrialPumpCard
+                code="B1"
+                title="Bomba primária"
+                model={EQUIPMENT_SPECS.primaryPump.model}
+                stateLabel={primaryRunning ? "Ligada" : "Desligada"}
+                performance={primaryRunning ? "96%" : "92%"}
+                connection={primaryRunning ? "Conectada" : "Em espera"}
+                active={primaryRunning}
+              />
+
+              <IndustrialPumpCard
+                code="B2"
+                title="Bomba secundária / Roots"
+                model={EQUIPMENT_SPECS.rootsPump.model}
+                stateLabel={rootsRunning ? "Ligada" : "Bloqueada"}
+                performance={rootsRunning ? "88%" : "86%"}
+                connection={rootsRunning ? "Conectada" : "Em espera"}
+                active={rootsRunning}
+              />
+            </div>
+          </Section>
+
+          <IndustrialSensorOilCard state={state} tankItems={safeTankItems} />
+        </aside>
+      </div>
+
+      <Section
+        title="Saúde dos componentes"
+        subtitle="Resumo técnico complementar de bombas, tanques, mangueiras e sensores."
+      >
+        <ComponentHealthPanel state={state} allTanks={allTanks} allHoses={allHoses} />
+      </Section>
+    </>
+  );
+}
+/* TSEA_DASHBOARD_INDUSTRIAL_END */
 function Chart({ points }: { points: any[] }) {
   if (!points?.length) {
     return <Empty text="Curva operacional indisponível para este registro." />;
@@ -2940,34 +3209,15 @@ useEffect(() => {
         )}
 
         {view === "dashboard" && (
-          <div className="screen">
-            <div className="metricsGrid">
-              <Metric label="Estado do Ciclo" value={state?.cycle?.status ? statusLabel(state.cycle.status) : "Parado"} status={state?.cycle?.status || "stopped"} />
-              <Metric label="Pressão Média" value={fmt(avgPressure, "mbar")} detail="Tanques monitorados" />
-              <Metric label="Risco Máximo" value={fmt(maxRisk, "%")} status={maxRisk >= 82 ? "critical" : maxRisk >= 65 ? "warning" : "success"} />
-              <Metric label="Registros" value={(operations.length + simulations.length).toString()} detail="Ciclos + simulações" />
-            </div>
-
-            <Section title="Mapa operacional" subtitle="Estado consolidado dos tanques de processo e mangueiras de vácuo.">
-              <div className="tankGrid">
-                {tanksState.map((item: any, index: number) => (
-                  <TankCard key={item?.tank?.id || index} item={item} />
-                ))}
-              </div>
-            </Section>
-
-            <Section title="Unidade de bombeamento" subtitle="Bomba primária, bomba secundária, óleo e comunicação.">
-              <div className="statusGrid">
-                <Metric label="Bomba Primária" value={state?.primary_pump?.running ? "Ligada" : "Desligada"} detail={state?.primary_pump?.model || "SV 630 B"} status={state?.primary_pump?.running ? "success" : "neutral"} />
-                <Metric label="Bomba secundária" value={state?.roots_pump?.running ? "Ligada" : "Bloqueada"} detail={state?.roots_pump?.model || "WSU 2001"} status={state?.roots_pump?.running ? "success" : "warning"} />
-                <Metric label="Injeção de Óleo" value={state?.oil_injection?.enabled ? "Ativa" : "Inativa"} detail={fmt(state?.oil_injection?.target_flow_l_min, "L/min")} status={state?.oil_injection?.enabled ? "success" : "neutral"} />
-                <Metric label="CLP" value={state?.plc_comm_ok ? "Comunicação normal" : "Falha de comunicação"} status={state?.plc_comm_ok ? "success" : "critical"} />
-              </div>
-            </Section>
-          </div>
-        )}
-
-        {view === "operation" && (
+  <DashboardIndustrialPanel
+    state={state}
+    tanksState={tanksState}
+    allTanks={allTanks}
+    allHoses={allHoses}
+    maxRisk={maxRisk}
+  />
+)}
+{view === "operation" && (
           <div className="screen">
 <Section title="Configuração da operação" subtitle="Parâmetros do ciclo antes da execução." action={<Badge value={state?.cycle?.status || "stopped"} />}>
               <div className="formGrid">
@@ -3205,6 +3455,7 @@ useEffect(() => {
 }
 
 createRoot(document.getElementById("root") as HTMLElement).render(<App />);
+
 
 
 
